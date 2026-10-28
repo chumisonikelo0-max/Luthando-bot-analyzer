@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07111f">
+<title>Luthando Bot Analyser</title>
+<style>
+:root{--bg:#07111f;--panel:#0d1b2d;--panel2:#10243a;--gold:#f5c542;--green:#16c784;--red:#ff5b6e;--text:#eef4fb;--muted:#9bb0c7;--line:#20364d}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#07111f,#081526 55%,#101a28);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:22px 18px 14px;position:sticky;top:0;background:#07111fee;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:2}
+.brand{display:flex;gap:12px;align-items:center}.logo{width:48px;height:48px;border:1px solid var(--gold);border-radius:14px;display:grid;place-items:center;color:var(--gold);font-size:25px;background:#161c24}.brand h1{font-size:17px;line-height:1.15;margin:0;letter-spacing:.5px}.brand p{margin:5px 0 0;color:var(--muted);font-size:12px}
+main{max-width:720px;margin:auto;padding:16px 14px 36px}.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid #285840;background:#0b2a24;color:#8ff0c1;padding:7px 10px;border-radius:99px;font-size:12px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green)}.hero{padding:18px 0 14px}.hero h2{font-size:25px;margin:12px 0 7px}.hero p{color:var(--muted);line-height:1.5;margin:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{background:linear-gradient(145deg,var(--panel),#0a1727);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:12px}.metric small,.muted{color:var(--muted)}.metric strong{display:block;font-size:21px;margin-top:7px}.gold{color:var(--gold)}.section-title{font-size:16px;margin:18px 2px 10px}.button{display:block;width:100%;padding:13px 14px;border:0;border-radius:12px;background:var(--gold);color:#161a21;font-weight:750;font-size:15px;margin-top:10px}.button.secondary{background:#122b44;color:var(--text);border:1px solid #2a4866}.button.green{background:var(--green);color:#04140e}.field{width:100%;border-radius:10px;padding:12px;background:#071321;color:var(--text);border:1px solid #294057;font:inherit;margin-top:6px}
+label{display:block;font-size:13px;color:#c5d3e1;margin:12px 0 0}.upload{border:1.5px dashed #45627f;border-radius:14px;text-align:center;padding:20px 12px;background:#091728}.upload input{max-width:100%;margin-top:12px}.preview{width:100%;max-height:330px;object-fit:contain;border-radius:10px;margin-top:12px;display:none;background:#020811}.notice{font-size:12px;color:var(--muted);line-height:1.5}.result{border-left:3px solid var(--gold);padding:10px 12px;background:#101e2d;border-radius:0 10px 10px 0;line-height:1.5}.result strong{color:var(--gold)}.checkrow{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line)}.checkrow:last-child{border:0}.checkrow input{accent-color:var(--gold);margin-top:4px}.foot{color:#7f95ad;text-align:center;font-size:11px;line-height:1.6;padding:18px 8px}.nav{position:sticky;bottom:0;display:flex;justify-content:space-around;gap:4px;padding:10px 6px calc(10px + env(safe-area-inset-bottom));background:#07111fee;border-top:1px solid var(--line)}.nav button{background:none;border:0;color:var(--muted);font-size:11px;padding:5px}.nav button span{display:block;font-size:19px;margin-bottom:3px}.nav button.active{color:var(--gold)}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">♉</div><div><h1>LUTHANDO BOT ANALYSER</h1><p>GOLD • XAUUSD • SCREENSHOT ANALYSIS</p></div></div></header>
+<main>
+<section class="hero" id="home"><span class="pill"><span class="dot"></span> Analysis workspace ready</span><h2>Trade with a plan.</h2><p>Upload a chart screenshot, record your observations, and check risk before making your own trading decision.</p></section>
+<div class="grid">
+  <div class="card metric"><small>Market</small><strong class="gold">XAUUSD</strong><small>Gold</small></div>
+  <div class="card metric"><small>Risk target</small><strong>0.5%</strong><small>R0.50 on R100</small></div>
+</div>
+<section class="card" id="analyser"><h3 class="section-title" style="margin-top:0">Analyse a screenshot</h3>
+<div class="upload"><strong>Choose your MT5 chart image</strong><div class="notice">Use a clear screenshot showing candles, timeframe, and price scale.</div><input id="chartFile" type="file" accept="image/*" capture="environment"><img id="preview" class="preview" alt="Selected chart screenshot"></div>
+<label for="timeframe">Chart timeframe</label><select id="timeframe" class="field"><option>M15 — 15 minutes</option><option>M5 — 5 minutes</option><option>M30 — 30 minutes</option><option>H1 — 1 hour</option><option>H4 — 4 hours</option></select>
+<label for="trend">Observed trend</label><select id="trend" class="field"><option value="unclear">Not sure / unclear</option><option value="bullish">Bullish — higher highs and lows</option><option value="bearish">Bearish — lower highs and lows</option><option value="range">Sideways / range-bound</option></select>
+<label for="setup">Setup observed</label><select id="setup" class="field"><option value="none">No confirmed setup</option><option value="pullback">Pullback near support/resistance</option><option value="breakout">Breakout with candle close</option><option value="rejection">Rejection candle at a key level</option></select>
+<label for="notes">Notes / visible price levels (optional)</label><textarea id="notes" class="field" rows="3" placeholder="Enter the visible price, support, resistance, or RSI value…"></textarea>
+<button class="button" id="analyseBtn">Review setup</button>
+<div id="result" style="display:none;margin-top:14px" class="result" aria-live="polite"></div>
+<p class="notice">This offline prototype does not automatically read chart pixels or fetch live market prices. Use ChatGPT image analysis for interpretation of the uploaded screenshot.</p>
+</section>
+<section class="card" id="risk"><h3 class="section-title" style="margin-top:0">Risk checklist</h3>
+<div class="grid"><div><label for="balance">Account balance (ZAR)</label><input class="field" id="balance" type="number" min="0" value="100"></div><div><label for="riskpct">Risk per trade (%)</label><input class="field" id="riskpct" type="number" min="0.1" max="1" step="0.1" value="0.5"></div></div>
+<div class="result" style="margin-top:12px">Planned risk budget: <strong id="riskMoney">R0.50</strong><div class="notice">Actual loss can exceed this due to gaps, slippage, fees, or execution conditions.</div></div>
+<div class="checkrow"><input type="checkbox" id="sl"><label for="sl" style="margin:0">I have identified a logical stop-loss level.</label></div>
+<div class="checkrow"><input type="checkbox" id="rr"><label for="rr" style="margin:0">The potential reward justifies the risk.</label></div>
+<div class="checkrow"><input type="checkbox" id="spread"><label for="spread" style="margin:0">I checked spread, lot size, and margin.</label></div>
+<div class="checkrow"><input type="checkbox" id="news"><label for="news" style="margin:0">I checked for major economic news.</label></div>
+<p class="notice">With a R100 account, the minimum XAUUSD lot size may make a 0.5% risk target impractical. If the smallest position risks too much, skip the trade.</p>
+</section>
+<section class="card" id="account"><h3 class="section-title" style="margin-top:0">Exness MT5 account</h3><p>Use MT5 on your phone to view your account and current quotes. This prototype is not connected to Exness and cannot access balances, place orders, or manage a real account.</p><button class="button secondary" id="copyPlan">Copy analysis summary</button><p class="notice" id="copyStatus" aria-live="polite"></p></section>
+<div class="foot">Luthando Bot Analyser • English edition • Prototype v0.1<br>Analysis support only — no profit guarantee. Never share your broker password or verification codes.</div>
+</main>
+<nav class="nav"><button class="active" data-target="home"><span>⌂</span>Home</button><button data-target="analyser"><span>⌕</span>Analyse</button><button data-target="risk"><span>◈</span>Risk</button><button data-target="account"><span>▣</span>Account</button></nav>
+<script>
+const $=id=>document.getElementById(id);
+$('chartFile').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];if(!f)return;const img=$('preview');img.src=URL.createObjectURL(f);img.style.display='block';});
+function updateRisk(){const b=Math.max(0,Number($('balance').value)||0),p=Math.max(0,Number($('riskpct').value)||0);$('riskMoney').textContent='R'+(b*p/100).toFixed(2)}
+$('balance').addEventListener('input',updateRisk);$('riskpct').addEventListener('input',updateRisk);
+$('analyseBtn').addEventListener('click',()=>{const trend=$('trend').value,setup=$('setup').value,tf=$('timeframe').value,notes=$('notes').value.trim();let assessment='NO TRADE — wait for a clearer setup.';let reason='The trend or entry condition is not confirmed. Avoid forcing a trade.';if(trend==='bullish'&&setup!=='none'){assessment='POTENTIAL BUY SETUP — needs confirmation';reason='Check that price holds support and a candle closes in the intended direction.'}else if(trend==='bearish'&&setup!=='none'){assessment='POTENTIAL SELL SETUP — needs confirmation';reason='Check that price respects resistance and a candle closes in the intended direction.'}else if(trend==='range'){assessment='WAIT — range conditions';reason='Avoid chasing moves in the middle of a range; confirm support or resistance first.'}const box=$('result');box.style.display='block';box.innerHTML='<strong>'+assessment+'</strong><br>'+reason+'<br><br><span class="notice">Timeframe: '+tf+'. This is a rule-based checklist, not AI image recognition or live-market data. Confirm current price, spread, stop-loss distance, and lot size in MT5 before considering any trade.'+(notes?'<br>Notes: '+notes.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])):'')+'</span>';});
+$('copyPlan').addEventListener('click',async()=>{const text='Luthando Bot Analyser\\nMarket: XAUUSD\\nTimeframe: '+$('timeframe').value+'\\nObserved trend: '+$('trend').value+'\\nSetup: '+$('setup').value+'\\nRisk budget: '+$('riskMoney').textContent+'\\nNotes: '+$('notes').value+'\\nPrototype only; not connected to Exness or live prices.';try{await navigator.clipboard.writeText(text);$('copyStatus').textContent='Summary copied.'}catch(e){$('copyStatus').textContent=text}});
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.target).scrollIntoView({behavior:'smooth',block:'start'})}));
+</script>
+</body></html>

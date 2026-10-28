@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PipLens Admin</title>
+<style>
+body{font-family:Arial;background:#0f172a;color:white;text-align:center;padding:20px}
+.card{background:#1e293b;padding:25px;border-radius:15px;max-width:500px;margin:auto;box-shadow:0 0 20px #000}
+button{padding:12px 20px;background:#22c55e;color:white;border:none;border-radius:8px;font-weight:bold;cursor:pointer;margin:5px}
+button:hover{background:#16a34a}
+input{padding:12px;width:80%;border-radius:8px;border:none;margin:10px 0}
+.keybox{background:#0f172a;padding:15px;border-radius:8px;margin:10px 0;font-family:monospace;word-break:break-all;border:1px solid #334155}
+</style>
+</head>
+<body>
+<h1>🔑 PipLens Admin</h1>
+<div class="card">
+<h3>Generate Licence Key</h3>
+<input id="client" placeholder="Client name e.g. John">
+<br>
+<button onclick="gen()">Generate Key</button>
+<button onclick="copy()" style="background:#3b82f6">Copy Key</button>
+<div id="out" class="keybox">Click Generate...</div>
+<h4 style="margin-top:20px">Valid Demo Keys:</h4>
+<p style="font-size:13px;text-align:left">
+PIPLENS-DEMO-2026<br>
+PIPLENS-ADMIN-123<br>
+NIKEL0-SKULL-2026
+</p>
+</div>
+
+<script>
+function gen(){
+let c=document.getElementById('client').value||"CLIENT";
+let n=Math.floor(1000+Math.random()*9000);
+let key="PIPLENS-"+c.toUpperCase().substring(0,4)+"-"+n;
+document.getElementById('out').innerText=key;
+}
+function copy(){
+let t=document.getElementById('out').innerText;
+navigator.clipboard.writeText(t);
+alert("Copied: "+t);
+}
+</script>
+</body>
+</html>
